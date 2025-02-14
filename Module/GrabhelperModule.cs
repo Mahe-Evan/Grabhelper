@@ -27,11 +27,17 @@ namespace Celeste.Mod.Grabhelper {
         public override void Load() {
             // TODO: apply any hooks that should always be active
            On.Celeste.Player.NormalUpdate += GrabCounting.FGrabCounting;
+          // On.Celeste.Player.ClimbUpdate += GrabCounting.PrintStamina;
+          On.Celeste.Holdable.Pickup += GrabCounting.Pickup;
+          On.Celeste.Level.End += GrabCounting.Checklastgrab;
         }
 
         public override void Unload() {
             // TODO: unapply any hooks applied in Load()
             On.Celeste.Player.NormalUpdate -= GrabCounting.FGrabCounting;
+           // On.Celeste.Player.ClimbUpdate -= GrabCounting.PrintStamina;
+            On.Celeste.Holdable.Pickup -= GrabCounting.Pickup;
+            On.Celeste.Level.End -= GrabCounting.Checklastgrab;
         }
     }
 }
