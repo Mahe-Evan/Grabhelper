@@ -26,18 +26,29 @@ namespace Celeste.Mod.Grabhelper {
 
         public override void Load() {
             // TODO: apply any hooks that should always be active
-           On.Celeste.Player.NormalUpdate += GrabCounting.FGrabCounting;
-          // On.Celeste.Player.ClimbUpdate += GrabCounting.PrintStamina;
-          On.Celeste.Holdable.Pickup += GrabCounting.Pickup;
-          On.Celeste.Level.End += GrabCounting.Checklastgrab;
+            On.Celeste.Player.NormalUpdate += GrabCountingHold.HoldGrabCounting;
+            On.Celeste.Holdable.Pickup += GrabCountingHold.HoldPickup;
+            On.Celeste.Level.End += GrabCountingHold.HoldChecklastgrab;
+            On.Celeste.Player.NormalUpdate += GrabCountingInvert.InvertGrabCounting;
+            On.Celeste.Holdable.Pickup += GrabCountingInvert.InvertPickup;
+            On.Celeste.Level.End += GrabCountingInvert.InvertChecklastgrab;
+            On.Celeste.Player.UpdateSprite += GrabCountingInvert.InvertClimbingCheck;
+            On.Celeste.Player.ClimbJump += GrabCountingInvert.InvertClimbingJump;
+          //  On.Celeste.Player.UpdateSprite += GrabCountingToogle.CountToogleMode;
+
         }
 
         public override void Unload() {
             // TODO: unapply any hooks applied in Load()
-            On.Celeste.Player.NormalUpdate -= GrabCounting.FGrabCounting;
-           // On.Celeste.Player.ClimbUpdate -= GrabCounting.PrintStamina;
-            On.Celeste.Holdable.Pickup -= GrabCounting.Pickup;
-            On.Celeste.Level.End -= GrabCounting.Checklastgrab;
+            On.Celeste.Player.NormalUpdate -= GrabCountingHold.HoldGrabCounting;
+            On.Celeste.Holdable.Pickup -= GrabCountingHold.HoldPickup;
+            On.Celeste.Level.End -= GrabCountingHold.HoldChecklastgrab;
+            On.Celeste.Player.NormalUpdate -= GrabCountingInvert.InvertGrabCounting;
+            On.Celeste.Holdable.Pickup -= GrabCountingInvert.InvertPickup;
+            On.Celeste.Level.End -= GrabCountingInvert.InvertChecklastgrab;
+            On.Celeste.Player.UpdateSprite -= GrabCountingInvert.InvertClimbingCheck;
+            On.Celeste.Player.ClimbJump -= GrabCountingInvert.InvertClimbingJump;
+          //  On.Celeste.Player.UpdateSprite -= GrabCountingToogle.CountToogleMode;
         }
     }
 }
