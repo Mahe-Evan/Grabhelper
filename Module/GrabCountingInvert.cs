@@ -15,6 +15,12 @@ namespace Celeste.Mod.Grabhelper {
 
         static private bool hasClimbJump = false;
     
+        static public void InvertWallJump(On.Celeste.Player.orig_WallJump orig, Player self, int dir) {
+            if ((int)Settings.Instance.GrabMode == 1) {
+                hasClimbJump = true;
+            }
+            orig(self, dir);
+        }
         static public void InvertClimbingJump(On.Celeste.Player.orig_ClimbJump orig, Player self) {
             if ((int)Settings.Instance.GrabMode == 1) {
                 if (!self.OnGround())
@@ -28,11 +34,16 @@ namespace Celeste.Mod.Grabhelper {
                 if (self.StateMachine.State == 1 && !isClimbing) {
                     if (!hasClimbJump) {
                         grabcount++;
-                        isClimbing = true;
                         hasClimbJump = false;
                         Logger.Info("GrabHelper", grabcount.ToString());
                     }
-                } else if (self.StateMachine.State != 1) {
+                    isClimbing = true;
+                }
+                if (hasClimbJump && isClimbing && self.StateMachine.State == 1 ||
+                    hasClimbJump && self.OnGround()) {
+                    hasClimbJump = false;
+                }
+                if (self.StateMachine.State != 1) {
                     isClimbing = false;
                 }
                 orig(self);
