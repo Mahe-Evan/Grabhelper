@@ -35,8 +35,10 @@ namespace Celeste.Mod.Grabhelper {
             On.Celeste.Player.UpdateSprite += GrabCountingInvert.InvertClimbingCheck;
             On.Celeste.Player.ClimbJump += GrabCountingInvert.InvertClimbingJump;
             On.Celeste.Player.WallJump += GrabCountingInvert.InvertWallJump;
-            // On.Celeste.Player.ClimbJump += GrabCountingToogle.ToogleClimbingJump;
-            // On.Celeste.Player.UpdateSprite += GrabCountingToogle.CountToogleMode;
+            On.Celeste.Player.ClimbJump += GrabCountingToogle.ToogleClimbingJump;
+            On.Celeste.Player.UpdateSprite += GrabCountingToogle.ToogleClimbingCheck;
+            On.Celeste.Player.WallJump += GrabCountingToogle.ToogleWallJump;
+            On.Celeste.Player.UpdateSprite += GrabCountingToogle.CountingToogle;
 
         }
 
@@ -51,8 +53,10 @@ namespace Celeste.Mod.Grabhelper {
             On.Celeste.Player.UpdateSprite -= GrabCountingInvert.InvertClimbingCheck;
             On.Celeste.Player.ClimbJump -= GrabCountingInvert.InvertClimbingJump;
             On.Celeste.Player.WallJump -= GrabCountingInvert.InvertWallJump;
-            // On.Celeste.Player.ClimbJump -= GrabCountingToogle.ToogleClimbingJump;
-            // On.Celeste.Player.UpdateSprite -= GrabCountingToogle.CountToogleMode;
+            On.Celeste.Player.ClimbJump -= GrabCountingToogle.ToogleClimbingJump;
+            On.Celeste.Player.UpdateSprite -= GrabCountingToogle.ToogleClimbingCheck;
+            On.Celeste.Player.WallJump -= GrabCountingToogle.ToogleWallJump;
+            On.Celeste.Player.UpdateSprite -= GrabCountingToogle.CountingToogle;
         }
     }
 }
