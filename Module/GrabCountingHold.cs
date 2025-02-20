@@ -4,18 +4,28 @@ namespace Celeste.Mod.Grabhelper {
     public class GrabCountingHold {
 
         static private int grabcount = 0;
-
-        static private bool HoldableCheck = true;
         static private bool isGrabbing = false;
         static private bool isHolding = false;
 
         static private bool PickupCheck = false;
 
+        static public void Load() {
+            On.Celeste.Player.NormalUpdate += HoldGrabCounting;
+            On.Celeste.Holdable.Pickup += HoldPickup;
+            On.Celeste.Level.End += HoldChecklastgrab;
+        }
+
+        static public void Unload() {
+            On.Celeste.Player.NormalUpdate -= HoldGrabCounting;
+            On.Celeste.Holdable.Pickup -= HoldPickup;
+            On.Celeste.Level.End -= HoldChecklastgrab;
+        }
+
         static public bool HoldPickup(On.Celeste.Holdable.orig_Pickup orig, Holdable self, Player player) {
             bool result = orig(self, player);
             if ((int)Settings.Instance.GrabMode == 0) {
                 Logger.Info("GrabHelper", "GrabMode 0");
-                if (result && !isGrabbing && !HoldableCheck) {
+                if (result && !isGrabbing && !GrabhelperModule.Settings.CheckHold) {
                     //Logger.Info("GrabHelper", "Pickup successful");
                     PickupCheck = true;
                     grabcount++;
@@ -28,7 +38,7 @@ namespace Celeste.Mod.Grabhelper {
         static public int HoldGrabCounting(On.Celeste.Player.orig_NormalUpdate orig, Player self) {
             if ((int)Settings.Instance.GrabMode == 0) {
                 if (self.Holding == null && Input.Grab.Check && !isGrabbing && !isHolding) {
-                    if (!HoldableCheck && !PickupCheck) {
+                    if (!GrabhelperModule.Settings.CheckHold && !PickupCheck) {
                         grabcount++;
                     }
                     Logger.Info("GrabHelper", grabcount.ToString());
@@ -39,7 +49,7 @@ namespace Celeste.Mod.Grabhelper {
                     isHolding = true;
                 }
                 if (!Input.Grab.Check) {
-                    if (isGrabbing && !isHolding && HoldableCheck && !PickupCheck) {
+                    if (isGrabbing && !isHolding && GrabhelperModule.Settings.CheckHold && !PickupCheck) {
                         grabcount++;
                         Logger.Info("GrabHelper", grabcount.ToString());
                     }
@@ -53,7 +63,7 @@ namespace Celeste.Mod.Grabhelper {
 
         static public void HoldChecklastgrab(On.Celeste.Level.orig_End orig, Level self) {
             if ((int)Settings.Instance.GrabMode == 0) {
-                if (!HoldableCheck && !PickupCheck) {
+                if (!GrabhelperModule.Settings.CheckHold && !PickupCheck) {
                     grabcount++;
                 }
                 Logger.Info("GrabHelper", grabcount.ToString());

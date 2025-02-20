@@ -2,10 +2,10 @@
 
 namespace Celeste.Mod.Grabhelper {
     public class GrabhelperModule : EverestModule {
-        public static GrabhelperModule Instance { get; private set; }
+        public static GrabhelperModule Instance;
 
-        // public override Type SettingsType => typeof(GrabhelperModuleSettings);
-        // public static GrabhelperModuleSettings Settings => (GrabhelperModuleSettings) Instance._Settings;
+        public override Type SettingsType => typeof(GrabhelperModuleSettings);
+        public static GrabhelperModuleSettings Settings => (GrabhelperModuleSettings) Instance._Settings;
 
         // public override Type SessionType => typeof(GrabhelperModuleSession);
         // public static GrabhelperModuleSession Session => (GrabhelperModuleSession) Instance._Session;
@@ -26,37 +26,17 @@ namespace Celeste.Mod.Grabhelper {
 
         public override void Load() {
             // TODO: apply any hooks that should always be active
-            On.Celeste.Player.NormalUpdate += GrabCountingHold.HoldGrabCounting;
-            On.Celeste.Holdable.Pickup += GrabCountingHold.HoldPickup;
-            On.Celeste.Level.End += GrabCountingHold.HoldChecklastgrab;
-            On.Celeste.Player.NormalUpdate += GrabCountingInvert.InvertGrabCounting;
-            On.Celeste.Holdable.Pickup += GrabCountingInvert.InvertPickup;
-            On.Celeste.Level.End += GrabCountingInvert.InvertChecklastgrab;
-            On.Celeste.Player.UpdateSprite += GrabCountingInvert.InvertClimbingCheck;
-            On.Celeste.Player.ClimbJump += GrabCountingInvert.InvertClimbingJump;
-            On.Celeste.Player.WallJump += GrabCountingInvert.InvertWallJump;
-            On.Celeste.Player.ClimbJump += GrabCountingToogle.ToogleClimbingJump;
-            On.Celeste.Player.UpdateSprite += GrabCountingToogle.ToogleClimbingCheck;
-            On.Celeste.Player.WallJump += GrabCountingToogle.ToogleWallJump;
-            On.Celeste.Player.UpdateSprite += GrabCountingToogle.CountingToogle;
-
+            GrabCountingHold.Load();
+            GrabCountingInvert.Load();
+            GrabCountingToogle.Load();
         }
 
         public override void Unload() {
             // TODO: unapply any hooks applied in Load()
-            On.Celeste.Player.NormalUpdate -= GrabCountingHold.HoldGrabCounting;
-            On.Celeste.Holdable.Pickup -= GrabCountingHold.HoldPickup;
-            On.Celeste.Level.End -= GrabCountingHold.HoldChecklastgrab;
-            On.Celeste.Player.NormalUpdate -= GrabCountingInvert.InvertGrabCounting;
-            On.Celeste.Holdable.Pickup -= GrabCountingInvert.InvertPickup;
-            On.Celeste.Level.End -= GrabCountingInvert.InvertChecklastgrab;
-            On.Celeste.Player.UpdateSprite -= GrabCountingInvert.InvertClimbingCheck;
-            On.Celeste.Player.ClimbJump -= GrabCountingInvert.InvertClimbingJump;
-            On.Celeste.Player.WallJump -= GrabCountingInvert.InvertWallJump;
-            On.Celeste.Player.ClimbJump -= GrabCountingToogle.ToogleClimbingJump;
-            On.Celeste.Player.UpdateSprite -= GrabCountingToogle.ToogleClimbingCheck;
-            On.Celeste.Player.WallJump -= GrabCountingToogle.ToogleWallJump;
-            On.Celeste.Player.UpdateSprite -= GrabCountingToogle.CountingToogle;
+            GrabCountingHold.Unload();
+            GrabCountingInvert.Unload();
+            GrabCountingToogle.Unload();
         }
     }
+    
 }

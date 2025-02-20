@@ -15,6 +15,19 @@ namespace Celeste.Mod.Grabhelper {
 
         static private bool hasClimbJumptoogle = false;
 
+        static public void Load() {
+            On.Celeste.Player.UpdateSprite += CountingToogle;
+            On.Celeste.Player.UpdateSprite += ToogleClimbingCheck;
+            On.Celeste.Player.WallJump += ToogleWallJump;
+            On.Celeste.Player.ClimbJump += ToogleClimbingJump;
+        }
+
+        static public void Unload() {
+            On.Celeste.Player.UpdateSprite -= CountingToogle;
+            On.Celeste.Player.UpdateSprite -= ToogleClimbingCheck;
+            On.Celeste.Player.WallJump -= ToogleWallJump;
+            On.Celeste.Player.ClimbJump -= ToogleClimbingJump;
+        }
         static public void ToogleWallJump(On.Celeste.Player.orig_WallJump orig, Player self, int dir) {
             if ((int)Settings.Instance.GrabMode == 2) {
                 hasClimbJumptoogle = true;
