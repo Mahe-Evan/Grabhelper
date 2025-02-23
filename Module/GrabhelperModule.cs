@@ -1,17 +1,19 @@
 ﻿using System;
 
+
 namespace Celeste.Mod.Grabhelper {
     public class GrabhelperModule : EverestModule {
         public static GrabhelperModule Instance;
 
+        public int GrabCount { get; set; } = 0;
         public override Type SettingsType => typeof(GrabhelperModuleSettings);
         public static GrabhelperModuleSettings Settings => (GrabhelperModuleSettings) Instance._Settings;
 
         // public override Type SessionType => typeof(GrabhelperModuleSession);
         // public static GrabhelperModuleSession Session => (GrabhelperModuleSession) Instance._Session;
 
-        // public override Type SaveDataType => typeof(GrabhelperModuleSaveData);
-        // public static GrabhelperModuleSaveData SaveData => (GrabhelperModuleSaveData) Instance._SaveData;
+        public override Type SaveDataType => typeof(GrabhelperModuleSaveData);
+        public static GrabhelperModuleSaveData SaveData => (GrabhelperModuleSaveData) Instance._SaveData;
 
         public GrabhelperModule() {
             Instance = this;
@@ -29,6 +31,7 @@ namespace Celeste.Mod.Grabhelper {
             GrabCountingHold.Load();
             GrabCountingInvert.Load();
             GrabCountingToogle.Load();
+            GrabCountingLevelSet.Load();
         }
 
         public override void Unload() {
@@ -36,6 +39,7 @@ namespace Celeste.Mod.Grabhelper {
             GrabCountingHold.Unload();
             GrabCountingInvert.Unload();
             GrabCountingToogle.Unload();
+            GrabCountingLevelSet.Unload();
         }
     }
     

@@ -4,7 +4,6 @@ using static Celeste.Mod.Grabhelper.GrabhelperModuleSettings;
 namespace Celeste.Mod.Grabhelper {
     public class GrabCountingInvert {
 
-        static private int grabcount = 0;
         static private bool isGrabbing = false;
         static private bool isHolding = false;
 
@@ -50,9 +49,9 @@ namespace Celeste.Mod.Grabhelper {
             if ((int)Settings.Instance.GrabMode == 1) {
                 if (self.StateMachine.State == 1 && !isClimbing) {
                     if (!hasClimbJump) {
-                        grabcount++;
+                        GrabhelperModule.Instance.GrabCount++;
                         hasClimbJump = false;
-                        Logger.Info("GrabHelper", grabcount.ToString());
+                        Logger.Info("GrabHelper", GrabhelperModule.Instance.GrabCount.ToString());
                     }
                     isClimbing = true;
                 }
@@ -74,8 +73,8 @@ namespace Celeste.Mod.Grabhelper {
                 if (result && !isGrabbing && GrabhelperModule.Settings.CheckHold) {
                     //Logger.Info("GrabHelper", "Pickup successful");
                     PickupCheck = true;
-                    grabcount++;
-                    Logger.Info("GrabHelper", grabcount.ToString());
+                    GrabhelperModule.Instance.GrabCount++;
+                    Logger.Info("GrabHelper", GrabhelperModule.Instance.GrabCount.ToString());
                 }
             }
             return result;
@@ -85,19 +84,19 @@ namespace Celeste.Mod.Grabhelper {
             if ((int)Settings.Instance.GrabMode == 1) {
                 if (self.Holding == null && !Input.Grab.Check && !isGrabbing && !isHolding) {
                     if (!GrabhelperModule.Settings.CheckHold && !PickupCheck) {
-                        grabcount++;
+                        GrabhelperModule.Instance.GrabCount++;
                     }
-                    Logger.Info("GrabHelper", grabcount.ToString());
+                    Logger.Info("GrabHelper", GrabhelperModule.Instance.GrabCount.ToString());
                     isGrabbing = true;
                 }
                 if (self.Holding != null && !Input.Grab.Check && isGrabbing && !isHolding) {
-                    Logger.Info("GrabHelper", grabcount.ToString());
+                    Logger.Info("GrabHelper", GrabhelperModule.Instance.GrabCount.ToString());
                     isHolding = true;
                 }
                 if (Input.Grab.Check) {
                     if (isGrabbing && !isHolding && GrabhelperModule.Settings.CheckHold && !PickupCheck) {
-                        grabcount++;
-                        Logger.Info("GrabHelper", grabcount.ToString());
+                        GrabhelperModule.Instance.GrabCount++;
+                        Logger.Info("GrabHelper", GrabhelperModule.Instance.GrabCount.ToString());
                     }
                     isGrabbing = false;
                     isHolding = false;
@@ -110,9 +109,9 @@ namespace Celeste.Mod.Grabhelper {
         static public void InvertChecklastgrab(On.Celeste.Level.orig_End orig, Level self) {
             // if ((int)Settings.Instance.GrabMode == 1) {
             //     if (!CheckHold && !PickupCheck) {
-            //         grabcount++;
+            //         GrabhelperModule.Instance.GrabCount++;++;
             //     }
-            //     Logger.Info("GrabHelper", grabcount.ToString());
+            //     Logger.Info("GrabHelper", GrabhelperModule.Instance.GrabCount++;.ToString());
             //     isGrabbing = false;
             //     isHolding = false;
             //     PickupCheck = false;
