@@ -6,6 +6,8 @@ namespace Celeste.Mod.Grabhelper {
         static public string level = null;
 
         static public AreaMode side = new AreaMode();
+
+        static public bool checkpoint = false;
     
         static public void Load() {
             On.Celeste.Level.Begin += onLevelBegin;
@@ -21,12 +23,14 @@ namespace Celeste.Mod.Grabhelper {
             GrabhelperModule.Instance.GrabCount = 0;
             level = self.Session.Area.GetSID();
             side = self.Session.Area.Mode;
+            checkpoint = self.Session.StartedFromBeginning;
             Logger.Info("GrabHelper", "Level: " + level + " Side: " + side.ToString());
+            Logger.Info("GrabHelper", "Checkpoint: " + checkpoint.ToString());
             orig(self);
         }
     
         private static void onLevelEnd(On.Celeste.Level.orig_End orig, Level self) {
-            if (self.Completed) {
+            if (self.Completed && checkpoint) {
                 if (!GrabhelperModule.SaveData.GrabCountPerLevel.ContainsKey(level)) {
                     GrabhelperModule.SaveData.GrabCountPerLevel[level] = new();
                 }
