@@ -24,8 +24,9 @@ namespace Celeste.Mod.Grabhelper {
             level = self.Session.Area.GetSID();
             side = self.Session.Area.Mode;
             checkpoint = self.Session.StartedFromBeginning;
-            Logger.Info("GrabHelper", "Level: " + level + " Side: " + side.ToString());
-            Logger.Info("GrabHelper", "Checkpoint: " + checkpoint.ToString());
+            self.Add(new CountDisplayInLevel());
+            // Logger.Info("GrabHelper", "Level: " + level + " Side: " + side.ToString());
+            // Logger.Info("GrabHelper", "Checkpoint: " + checkpoint.ToString());
             orig(self);
         }
     
