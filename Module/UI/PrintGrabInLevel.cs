@@ -74,7 +74,7 @@ namespace Celeste.Mod.Grabhelper {
                 Vector2 position = new(20, positionY);
                 Vector2 iconSize = new(1.5f, 1.5f);
                 Vector2 xSize = new(8, 8);
-                Vector2 bgSize = new(0.6f, 1.5f);
+                Vector2 bgSize = new(str.Length * 0.05f, 1.5f);
 
                 bg.Draw(new Vector2(position.X, position.Y), Vector2.Zero, Color.Black, bgSize);
                 icon.Draw(position + new Vector2(0, 0), Vector2.Zero, Color.White, iconSize);
