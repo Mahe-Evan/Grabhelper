@@ -28,7 +28,7 @@ namespace Celeste.Mod.Grabhelper {
                     //Logger.Info("GrabHelper", "Pickup successful");
                     PickupCheck = true;
                     GrabhelperModule.Instance.GrabCount++;
-                    Logger.Info("GrabHelper", GrabhelperModule.Instance.GrabCount.ToString());
+                    // Logger.Info("GrabHelper", GrabhelperModule.Instance.GrabCount.ToString());
                 }
             }
             return result;

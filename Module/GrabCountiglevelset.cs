@@ -41,7 +41,7 @@ namespace Celeste.Mod.Grabhelper {
                 if (GrabhelperModule.Instance.GrabCount < GrabhelperModule.SaveData.GrabCountPerLevel[level][side]) {
                     GrabhelperModule.SaveData.GrabCountPerLevel[level][side] = GrabhelperModule.Instance.GrabCount;
                 }
-                Logger.Info("GrabHelper", "GrabCount: " + GrabhelperModule.Instance.GrabCount.ToString());
+                // Logger.Info("GrabHelper", "GrabCount: " + GrabhelperModule.Instance.GrabCount.ToString());
             }
             orig(self);
         }

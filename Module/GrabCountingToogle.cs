@@ -52,7 +52,7 @@ namespace Celeste.Mod.Grabhelper {
                     hastoogleinput = true;
                     isgrabactiveted = false;
                     GrabhelperModule.Instance.GrabCount++;
-                    Logger.Info("GrabHelper", GrabhelperModule.Instance.GrabCount.ToString());
+                    // Logger.Info("GrabHelper", GrabhelperModule.Instance.GrabCount.ToString());
                 }
                 if (!Input.Grab.Check) {
                     istoogleholding = true;
@@ -70,7 +70,7 @@ namespace Celeste.Mod.Grabhelper {
                     if (!hasClimbJumptoogle) {
                     GrabhelperModule.Instance.GrabCount++;
                     hasClimbJumptoogle = false;
-                    Logger.Info("GrabHelper", GrabhelperModule.Instance.GrabCount.ToString());
+                    // Logger.Info("GrabHelper", GrabhelperModule.Instance.GrabCount.ToString());
                     }
                     istooglegrabbing = true;
                 }
