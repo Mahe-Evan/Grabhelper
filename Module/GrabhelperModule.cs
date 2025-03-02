@@ -32,6 +32,7 @@ namespace Celeste.Mod.Grabhelper {
             GrabCountingInvert.Load();
             GrabCountingToogle.Load();
             GrabCountingLevelSet.Load();
+            GrabCountJournalPage.Load();
         }
 
         public override void Unload() {
@@ -40,6 +41,7 @@ namespace Celeste.Mod.Grabhelper {
             GrabCountingInvert.Unload();
             GrabCountingToogle.Unload();
             GrabCountingLevelSet.Unload();
+            GrabCountJournalPage.Unload();
         }
     }
     
