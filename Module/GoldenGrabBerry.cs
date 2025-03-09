@@ -22,7 +22,7 @@ namespace Celeste.Mod.Grabhelper {
 			this.isfollowing = false;
 			Golden = true;
 			isGhostBerry = SaveData.Instance.CheckStrawberry(ID);
-			Logger.Info("GoldenGrabBerry in Constructor: ", isGhostBerry.ToString());
+			//Logger.Info("GoldenGrabBerry in Constructor: ", isGhostBerry.ToString());
 			base.Depth = -100;
 			base.Collider = new Hitbox(14f, 14f, -7f, -7f);
 			base.Add(new PlayerCollider(new Action<Player>(OnPlayer), null, null));
@@ -36,7 +36,7 @@ namespace Celeste.Mod.Grabhelper {
 			base.Added(scene);
 			if (SaveData.Instance.CheckStrawberry(ID))
 			{
-				Logger.Info("GoldenGrabBerry in Added: ", isGhostBerry.ToString());
+				//Logger.Info("GoldenGrabBerry in Added: ", isGhostBerry.ToString());
 				sprite = GFX.SpriteBank.Create("goldghostberry");
 				sprite.Color = Color.White * 0.8f;
 			}
@@ -64,6 +64,10 @@ namespace Celeste.Mod.Grabhelper {
 			if ((scene as Level).Session.BloomBaseAdd > 0.1f)
 			{
 				bloom.Alpha *= 0.5f;
+			}
+			if (!SaveData.Instance.GetAreaStatsFor((scene as Level).Session.Area).Modes[0].Completed)
+			{
+				RemoveSelf();
 			}
 		}
 
@@ -160,6 +164,7 @@ namespace Celeste.Mod.Grabhelper {
 				base.Depth = -1000000;
 				base.Add(new Coroutine(FlyAwayRoutine(), true));
 				flyingAway = true;
+				Follower.Leader = null;
 			}
 		}
 
