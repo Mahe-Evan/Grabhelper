@@ -3,7 +3,7 @@ using Celeste.Mod.Grabhelper;
 namespace Celeste.Mod.Grabhelper {
     public class GrabCountingToogle {
 
-        static private bool istooglegrabbing = false;
+        static public bool isGrabbing = false;
 
         static private bool istoogleholding = false;
 
@@ -66,20 +66,20 @@ namespace Celeste.Mod.Grabhelper {
         }
         static public void ToogleClimbingCheck(On.Celeste.Player.orig_UpdateSprite orig, Player self) {
             if ((int)Settings.Instance.GrabMode == 2) {
-                if (self.StateMachine.State == 1 && !istooglegrabbing) {
+                if (self.StateMachine.State == 1 && !isGrabbing) {
                     if (!hasClimbJumptoogle) {
                     GrabhelperModule.Instance.GrabCount++;
                     hasClimbJumptoogle = false;
                     // Logger.Info("GrabHelper", GrabhelperModule.Instance.GrabCount.ToString());
                     }
-                    istooglegrabbing = true;
+                    isGrabbing = true;
                 }
-                if (hasClimbJumptoogle && istooglegrabbing && self.StateMachine.State == 1 ||
+                if (hasClimbJumptoogle && isGrabbing && self.StateMachine.State == 1 ||
                     hasClimbJumptoogle && self.OnGround()) {
                     hasClimbJumptoogle = false;
                 }
                 if (self.StateMachine.State != 1) {
-                    istooglegrabbing = false;
+                    isGrabbing = false;
                 }
                 orig(self);
             }

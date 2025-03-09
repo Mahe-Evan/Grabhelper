@@ -9,7 +9,7 @@ namespace Celeste.Mod.Grabhelper {
 
         static protected bool PickupCheck = false;
     
-        static private bool isClimbing = false;
+        static public bool isClimbing = false;
 
         static private bool hasClimbJump = false;
 
@@ -68,7 +68,7 @@ namespace Celeste.Mod.Grabhelper {
         static public bool InvertPickup(On.Celeste.Holdable.orig_Pickup orig, Holdable self, Player player) {
             bool result = orig(self, player);
             if ((int)Settings.Instance.GrabMode == 1) {
-                if (result && !isGrabbing && GrabhelperModule.Settings.CheckHold) {
+                if (result && !isGrabbing && GrabhelperModule.GrabhelperSettings.CheckHold) {
                     //Logger.Info("GrabHelper", "Pickup successful");
                     PickupCheck = true;
                     GrabhelperModule.Instance.GrabCount++;
@@ -81,7 +81,7 @@ namespace Celeste.Mod.Grabhelper {
         static public int InvertGrabCounting(On.Celeste.Player.orig_NormalUpdate orig, Player self) {
             if ((int)Settings.Instance.GrabMode == 1) {
                 if (self.Holding == null && !Input.Grab.Check && !isGrabbing && !isHolding) {
-                    if (!GrabhelperModule.Settings.CheckHold && !PickupCheck) {
+                    if (!GrabhelperModule.GrabhelperSettings.CheckHold && !PickupCheck) {
                         GrabhelperModule.Instance.GrabCount++;
                     }
                 //    Logger.Info("GrabHelper", GrabhelperModule.Instance.GrabCount.ToString());
@@ -92,7 +92,7 @@ namespace Celeste.Mod.Grabhelper {
                     isHolding = true;
                 }
                 if (Input.Grab.Check) {
-                    if (isGrabbing && !isHolding && GrabhelperModule.Settings.CheckHold && !PickupCheck) {
+                    if (isGrabbing && !isHolding && GrabhelperModule.GrabhelperSettings.CheckHold && !PickupCheck) {
                         GrabhelperModule.Instance.GrabCount++;
                    //     Logger.Info("GrabHelper", GrabhelperModule.Instance.GrabCount.ToString());
                     }

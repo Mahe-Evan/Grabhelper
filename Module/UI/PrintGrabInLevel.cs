@@ -41,7 +41,7 @@ namespace Celeste.Mod.Grabhelper {
             base.Render();
 
             if (level == null || level.Session == null) {
-                Logger.Log("Grabhelper", "I lost the game :3");
+                //Logger.Log("Grabhelper", "I lost the game :3");
                 return;
             }
 
@@ -50,7 +50,7 @@ namespace Celeste.Mod.Grabhelper {
 
             string str = string.Empty;
             if (ModSaveData.GrabCountPerLevel.TryGetValue(levelSID, out Dictionary<AreaMode, int> grabCounts)) {
-                if (grabCounts.TryGetValue(side, out int grabCount) && GrabhelperModule.Settings.PrintGrabCount) {
+                if (grabCounts.TryGetValue(side, out int grabCount) && GrabhelperModule.GrabhelperSettings.PrintGrabCount) {
                     //Logger.Info("Grabhelper", $"Grab count: {grabCount}");
                     str = "( " + ModSaveData.GrabCountPerLevel[levelSID][side].ToString() + " ) " + GrabhelperModule.Instance.GrabCount.ToString();
                 
@@ -60,7 +60,7 @@ namespace Celeste.Mod.Grabhelper {
             } else {
                 str = "( " + " ) " + GrabhelperModule.Instance.GrabCount.ToString();
             }
-            if (GrabhelperModule.Settings.PrintGrabCount) {
+            if (GrabhelperModule.GrabhelperSettings.PrintGrabCount) {
                 if (speedrunTimer.DrawLerp > 0f) {
                     positionY = 200;
                 } else {
