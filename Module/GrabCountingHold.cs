@@ -23,7 +23,7 @@ namespace Celeste.Mod.Grabhelper {
         static public bool HoldPickup(On.Celeste.Holdable.orig_Pickup orig, Holdable self, Player player) {
             bool result = orig(self, player);
             if ((int)Settings.Instance.GrabMode == 0) {
-                Logger.Info("GrabHelper", "GrabMode 0");
+                //Logger.Info("GrabHelper", "GrabMode 0");
                 if (result && !isGrabbing && !GrabhelperModule.GrabhelperSettings.CheckHold) {
                     //Logger.Info("GrabHelper", "Pickup successful");
                     PickupCheck = true;
@@ -40,17 +40,17 @@ namespace Celeste.Mod.Grabhelper {
                     if (!GrabhelperModule.GrabhelperSettings.CheckHold && !PickupCheck) {
                         GrabhelperModule.Instance.GrabCount++;
                     }
-                    Logger.Info("GrabHelper", GrabhelperModule.Instance.GrabCount.ToString());
+                    // Logger.Info("GrabHelper", GrabhelperModule.Instance.GrabCount.ToString());
                     isGrabbing = true;
                 }
                 if (self.Holding != null && Input.Grab.Check && isGrabbing && !isHolding) {
-                    Logger.Info("GrabHelper", GrabhelperModule.Instance.GrabCount.ToString());
+                    // Logger.Info("GrabHelper", GrabhelperModule.Instance.GrabCount.ToString());
                     isHolding = true;
                 }
                 if (!Input.Grab.Check) {
                     if (isGrabbing && !isHolding && GrabhelperModule.GrabhelperSettings.CheckHold && !PickupCheck) {
                         GrabhelperModule.Instance.GrabCount++;
-                        Logger.Info("GrabHelper", GrabhelperModule.Instance.GrabCount.ToString());
+                        // Logger.Info("GrabHelper", GrabhelperModule.Instance.GrabCount.ToString());
                     }
                     isGrabbing = false;
                     isHolding = false;
@@ -65,7 +65,7 @@ namespace Celeste.Mod.Grabhelper {
                 if (!GrabhelperModule.GrabhelperSettings.CheckHold && !PickupCheck) {
                     GrabhelperModule.Instance.GrabCount++;
                 }
-                Logger.Info("GrabHelper", GrabhelperModule.Instance.GrabCount.ToString());
+                // Logger.Info("GrabHelper", GrabhelperModule.Instance.GrabCount.ToString());
                 isGrabbing = false;
                 isHolding = false;
                 PickupCheck = false;

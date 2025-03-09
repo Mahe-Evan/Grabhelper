@@ -21,7 +21,7 @@ namespace Celeste.Mod.Grabhelper {
 			this.start = this.Position;
 			this.isfollowing = false;
 			isGhostBerry = SaveData.Instance.CheckStrawberry(ID);
-			Logger.Info("GrabBerry in Constructor: ", isGhostBerry.ToString());
+			//Logger.Info("GrabBerry in Constructor: ", isGhostBerry.ToString());
 			base.Depth = -100;
 			base.Collider = new Hitbox(14f, 14f, -7f, -7f);
 			base.Add(new PlayerCollider(new Action<Player>(OnPlayer), null, null));
@@ -35,7 +35,7 @@ namespace Celeste.Mod.Grabhelper {
 			base.Added(scene);
 			if (SaveData.Instance.CheckStrawberry(ID))
 			{
-				Logger.Info("GrabBerry in Added: ", isGhostBerry.ToString());
+				//Logger.Info("GrabBerry in Added: ", isGhostBerry.ToString());
 				sprite = GFX.SpriteBank.Create("ghostberry");
 				sprite.Color = Color.White * 0.8f;
 			}
