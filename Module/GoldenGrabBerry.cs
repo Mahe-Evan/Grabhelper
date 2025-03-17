@@ -293,6 +293,7 @@ namespace Celeste.Mod.Grabhelper {
 				flapSpeed = MathHelper.Lerp(0f, -200f, t.Eased);
 			};
 			Add(tween);
+			RemoveSelf();
 			yield break;
 		}
 
